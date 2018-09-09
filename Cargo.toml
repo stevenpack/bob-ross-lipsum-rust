@@ -1,5 +1,5 @@
 [package]
-name = "bobross-api"
+name = "bob-ross-lipsum-rust"
 version = "0.1.0"
 authors = ["stevenpack <steven.pack.code@gmail.com>"]
 
