@@ -1,0 +1,7 @@
+[package]
+name = "bobross-api"
+version = "0.1.0"
+authors = ["stevenpack <steven.pack.code@gmail.com>"]
+
+[dependencies]
+rand = "0.5.5"
