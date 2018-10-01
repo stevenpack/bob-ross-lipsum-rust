@@ -1,3 +1,9 @@
 /target
 **/*.rs.bk
 Cargo.lock
+working
+bak
+*.log
+bin
+pkg
+www

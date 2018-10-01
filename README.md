@@ -1,4 +1,2 @@
-# bob-ross-lipsum-rust
-Bob Ross Lorem Ipsum Generator in Rust + wasm
-
-Rust + wasm implementation of https://github.com/stevenpack/bob-ross-lipsum
+# wasm-pack-template
+a template for starting a rust-wasm project to be used with wasm-pack
