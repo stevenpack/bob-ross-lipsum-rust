@@ -4,7 +4,6 @@ use std::vec::Vec;
 use rand::distributions::{Range, Distribution};
 //use prng_seeded::{Prng,SeedType};
 use rand::rngs::SmallRng;
-use rand::FromEntropy;
 //use js_sys::Date;
 
 // Compiled by http://www.bobrosslipsum.com/ 2016 January
@@ -397,8 +396,43 @@ fn get_rng() -> SmallRng {
     //No sys calls available. Use the Javascript implementation to get the ticks
     // let ticks = Date::now();  
     // Prng::with(SeedType::External(ticks as u32))
-    SmallRng::from_entropy()
+   // SmallRng::from_entropy()
+
+    use js_sys::Date;
+    use rand::SeedableRng;
+
+    let ticks = Date::now(); 
+    //convert the number to byte array
+    let tick_bytes = transmute(ticks as u128); 
+    SmallRng::from_seed(tick_bytes)
 }
+
+fn transmute(x: u128) -> [u8; 16] {
+
+        let b1 : u8 = ((x >> 120) & 0xffffffff) as u8;
+        let b2 : u8 = ((x >> 112) & 0xffffffff) as u8;
+        let b3 : u8 = ((x >> 104) & 0xffffffff) as u8;
+        let b4 : u8 = ((x >> 96) & 0xffffffff) as u8;    
+        
+        let b5 : u8 = ((x >> 88) & 0xffffffff) as u8;
+        let b6 : u8 = ((x >> 80) & 0xffffffff) as u8;
+        let b7 : u8 = ((x >> 72) & 0xffffffff) as u8;    
+        let b8 : u8 = ((x >> 64) & 0xffffffff) as u8;    
+
+        let b9 : u8 = ((x >> 56) & 0xffffffff) as u8;
+        let b10 : u8 = ((x >> 48) & 0xffffffff) as u8;
+        let b11 : u8 = ((x >> 40) & 0xffffffff) as u8;
+        let b12 : u8 = ((x >> 32) & 0xffffffff) as u8;
+        
+        let b13 : u8 = ((x >> 24) & 0xffffffff) as u8;
+        let b14 : u8 = ((x >> 16) & 0xffffffff) as u8;
+        let b15 : u8 = ((x >> 8) & 0xffffffff) as u8;    
+        let b16 : u8 = (x & 0xffffffff) as u8;
+
+        //Most of the entropy is in the last few bytes and generators are allowed
+        //to assume evenly spread entropy in the seed, so spread the bytes around
+        [b16, b1, b14, b3, b12, b5, b10, b7, b8, b9, b6, b11, b4, b13, b2, b15]
+    }
 
 fn get_phrases(idxs: &Vec<usize>) -> Vec<&'static str> {    
     idxs.iter()

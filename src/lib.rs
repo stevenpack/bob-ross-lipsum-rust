@@ -3,6 +3,7 @@ extern crate rand;
 extern crate test;
 extern crate cfg_if;
 extern crate wasm_bindgen;
+extern crate js_sys;
 
 mod utils;
 mod phrases;

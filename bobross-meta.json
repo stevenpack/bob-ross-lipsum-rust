@@ -1,0 +1,10 @@
+{
+  "body_part": "script",
+  "bindings":[
+     {
+        "name":"bobross",
+        "type":"wasm_module",
+        "part":"wasmprogram"
+     }
+  ]
+}
