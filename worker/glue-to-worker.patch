@@ -1,0 +1,147 @@
+diff --git a/bob_ross_lorem_ipsum_rust.js b/bob_ross_lorem_ipsum_rust.1.js
+index 459f37d..ae1ebfa 100644
+--- a/bob_ross_lorem_ipsum_rust.js
++++ b/bob_ross_lorem_ipsum_rust.1.js
+@@ -1,69 +1,86 @@
+-/* tslint:disable */
+-import * as wasm from './bob_ross_lorem_ipsum_rust_bg';
++const mod = (() => {
++    let wasm;
+ 
+-let cachedDecoder = new TextDecoder('utf-8');
++    let cachedDecoder = new TextDecoder('utf-8');
+ 
+-let cachegetUint8Memory = null;
+-function getUint8Memory() {
+-    if (cachegetUint8Memory === null || cachegetUint8Memory.buffer !== wasm.memory.buffer) {
+-        cachegetUint8Memory = new Uint8Array(wasm.memory.buffer);
++    let cachegetUint8Memory = null;
++    function getUint8Memory() {
++        if (cachegetUint8Memory === null || cachegetUint8Memory.buffer !== wasm.memory.buffer) {
++            cachegetUint8Memory = new Uint8Array(wasm.memory.buffer);
++        }
++        return cachegetUint8Memory;
+     }
+-    return cachegetUint8Memory;
+-}
+ 
+-function getStringFromWasm(ptr, len) {
+-    return cachedDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));
+-}
++    function getStringFromWasm(ptr, len) {
++        return cachedDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));
++    }
++
++    function __wbg_alert_8c454b1ebc6068d7(arg0, arg1) {
++        let varg0 = getStringFromWasm(arg0, arg1);
++        alert(varg0);
++    }
++    /**
++    * @returns {void}
++    */
++    function greet() {
++        return wasm.greet();
++    }
+ 
+-export function __wbg_alert_8c454b1ebc6068d7(arg0, arg1) {
+-    let varg0 = getStringFromWasm(arg0, arg1);
+-    alert(varg0);
+-}
+-/**
+-* @returns {void}
+-*/
+-export function greet() {
+-    return wasm.greet();
+-}
++    let cachedGlobalArgumentPtr = null;
++    function globalArgumentPtr() {
++        if (cachedGlobalArgumentPtr === null) {
++            cachedGlobalArgumentPtr = wasm.__wbindgen_global_argument_ptr();
++        }
++        return cachedGlobalArgumentPtr;
++    }
+ 
+-let cachedGlobalArgumentPtr = null;
+-function globalArgumentPtr() {
+-    if (cachedGlobalArgumentPtr === null) {
+-        cachedGlobalArgumentPtr = wasm.__wbindgen_global_argument_ptr();
++    let cachegetUint32Memory = null;
++    function getUint32Memory() {
++        if (cachegetUint32Memory === null || cachegetUint32Memory.buffer !== wasm.memory.buffer) {
++            cachegetUint32Memory = new Uint32Array(wasm.memory.buffer);
++        }
++        return cachegetUint32Memory;
+     }
+-    return cachedGlobalArgumentPtr;
+-}
++    /**
++    * @param {number} arg0
++    * @param {number} arg1
++    * @returns {string}
++    */
++    function get_phrase_text(arg0, arg1) {
++        const retptr = globalArgumentPtr();
++        wasm.get_phrase_text(retptr, arg0, arg1);
++        const mem = getUint32Memory();
++        const rustptr = mem[retptr / 4];
++        const rustlen = mem[retptr / 4 + 1];
++
++        const realRet = getStringFromWasm(rustptr, rustlen).slice();
++        wasm.__wbindgen_free(rustptr, rustlen * 1);
++        return realRet;
+ 
+-let cachegetUint32Memory = null;
+-function getUint32Memory() {
+-    if (cachegetUint32Memory === null || cachegetUint32Memory.buffer !== wasm.memory.buffer) {
+-        cachegetUint32Memory = new Uint32Array(wasm.memory.buffer);
+     }
+-    return cachegetUint32Memory;
+-}
+-/**
+-* @param {number} arg0
+-* @param {number} arg1
+-* @returns {string}
+-*/
+-export function get_phrase_text(arg0, arg1) {
+-    const retptr = globalArgumentPtr();
+-    wasm.get_phrase_text(retptr, arg0, arg1);
+-    const mem = getUint32Memory();
+-    const rustptr = mem[retptr / 4];
+-    const rustlen = mem[retptr / 4 + 1];
+ 
+-    const realRet = getStringFromWasm(rustptr, rustlen).slice();
+-    wasm.__wbindgen_free(rustptr, rustlen * 1);
+-    return realRet;
++    const __wbg_now_4410283ed4cdb45a_target = Date.now.bind(Date) || function() {
++        throw new Error(`wasm-bindgen: Date.now.bind(Date) does not exist`);
++    };
++
++    function __wbg_now_4410283ed4cdb45a() {
++        return __wbg_now_4410283ed4cdb45a_target();
++    }
+ 
+-}
++    const importObject = {
++        './bob_ross_lorem_ipsum_rust': {
++            __wbg_alert_8c454b1ebc6068d7,
++            __wbg_now_4410283ed4cdb45a,
++        }
++    };
+ 
+-const __wbg_now_4410283ed4cdb45a_target = Date.now.bind(Date) || function() {
+-    throw new Error(`wasm-bindgen: Date.now.bind(Date) does not exist`);
+-};
++    const inst = new WebAssembly.Instance(WASM, importObject);
++    wasm = inst.exports;
+ 
+-export function __wbg_now_4410283ed4cdb45a() {
+-    return __wbg_now_4410283ed4cdb45a_target();
+-}
++    return {
++        greet,
++        get_phrase_text,
++    };
++})();
+ 
++console.log(mod.get_phrase_text());
+\ No newline at end of file
