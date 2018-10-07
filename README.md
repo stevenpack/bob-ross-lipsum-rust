@@ -1,2 +1,2 @@
-# wasm-pack-template
-a template for starting a rust-wasm project to be used with wasm-pack
+# Bob Ross Lorem Ipsum generator in Rust
+Example of Rust to WebAssembly in a Cloudflare Worker
